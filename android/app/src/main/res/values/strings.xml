@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">MechaSonic</string>
+    <string name="title_activity_main">MechaSonic</string>
+    <string name="package_name">com.mechasonic.diagnostics</string>
+    <string name="custom_url_scheme">com.mechasonic.diagnostics</string>
+</resources>
