@@ -1,0 +1,13 @@
+node_modules/
+dist/
+*.local
+android/.gradle/
+android/local.properties
+android/app/build/
+android/build/
+android/capacitor-cordova-android-plugins/
+
+*.tsbuildinfo
+.env
+.env.*
+!.env.example
