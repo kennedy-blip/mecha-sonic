@@ -24,7 +24,18 @@ jobs:
         with:
           distribution: temurin
           java-version: '21'
-      - uses: android-actions/setup-android@v3
+      - name: Use hosted runner Android SDK
+        shell: bash
+        run: |
+          test -n "${ANDROID_HOME:-}" && test -d "$ANDROID_HOME"
+          if [ ! -d "$ANDROID_HOME/platforms/android-35" ] || [ ! -d "$ANDROID_HOME/build-tools/35.0.0" ]; then
+            SDKMANAGER="$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager"
+            test -x "$SDKMANAGER"
+            set +o pipefail
+            yes | "$SDKMANAGER" --licenses > /dev/null
+            set -o pipefail
+            "$SDKMANAGER" --install "platforms;android-35" "build-tools;35.0.0"
+          fi
       - run: npm ci
       - run: npm test
       - run: npm run build
@@ -40,8 +51,8 @@ jobs:
         with:
           name: MechaSonic-Android-debug
           path: public/releases/
-      - name: Bundle into the triggering branch (explicit opt-in)
-        if: github.event_name == 'workflow_dispatch' && inputs.bundle
+      - name: Bundle into the triggering branch
+        if: (github.event_name == 'push' && startsWith(github.ref, 'refs/heads/arena/')) || (github.event_name == 'workflow_dispatch' && inputs.bundle)
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'

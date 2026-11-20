@@ -8,7 +8,7 @@ Scans, assets and estimates stay in IndexedDB by default. The service worker cac
 
 ## Android
 
-The Capacitor Android project is included. With the Android SDK and JDK 21 installed, run `npm run build`, `npx cap sync android`, and `cd android && ./gradlew assembleDebug`. The GitHub Actions workflow runs tests, builds and uploads a debug-signed APK on branch pushes. A manual workflow run with the `bundle` option explicitly enabled also commits that APK and its SHA-256 file to `public/releases/` on the triggering branch. A debug APK is for testing, not a verified production release. No APK is included until the workflow runs. The download center does not offer a fake binary. For production, configure release signing and verify its checksum independently.
+The Capacitor Android project is included. With the Android SDK and JDK 21 installed, run `npm run build`, `npx cap sync android`, and `cd android && ./gradlew assembleDebug`. The GitHub Actions workflow runs tests, builds and uploads a debug-signed APK on branch pushes. Pushes on `arena/` branches also commit the resulting APK and SHA-256 file to `public/releases/` on the same branch; other branches can opt in using the manual workflow `bundle` option. A debug APK is for testing, not a verified production release. No APK is included until the workflow runs. The download center does not offer a fake binary. For production, configure release signing and verify its checksum independently.
 
 ## Signal and motion notes
 
